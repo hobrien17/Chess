@@ -23,4 +23,9 @@ public class King extends AbstractPiece {
 	public String toString() {
 		return colour.toString() + " King (" + row + ", " + col + ")";
 	}
+
+	@Override
+	public String getName() {
+		return "king";
+	}
 }

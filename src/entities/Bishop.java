@@ -23,4 +23,9 @@ public class Bishop extends AbstractPiece {
 	public String toString() {
 		return colour.toString() + " Bishop (" + row + ", " + col + ")";
 	}
+
+	@Override
+	public String getName() {
+		return "bishop";
+	}
 }

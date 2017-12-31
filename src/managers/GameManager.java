@@ -1,23 +1,47 @@
 package managers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.AbstractPiece;
 import entities.Colour;
 import entities.Knight;
+import entities.Pawn;
+import gui.Controller;
+import gui.View;
 import world.Board;
 
 public class GameManager {
-	public static GameManager instance = new GameManager();
 	public static KingManager blackManager = new KingManager(Colour.BLACK);
 	public static KingManager whiteManager = new KingManager(Colour.WHITE);
 	public static PieceManager pieceManager = new PieceManager();
+	public static Controller controller = new Controller();
+	public static GameManager instance = new GameManager();
 	
 	private Board board;
 	private Colour winner;
+	private Colour turn;
+	private View gui;
+		
+	public GameManager() {
+		
+		
+	}
 	
 	public Board getBoard() {
 		return board;
+	}
+	
+	public void startGUI() {
+		gui = new View();
+	}
+	
+	public View getGUI() {
+		return gui;
+	}
+	
+	public Colour getTurn() {
+		return turn;
 	}
 	
 	public static KingManager getKM(Colour colour) {
@@ -50,6 +74,28 @@ public class GameManager {
 		}
 		blackManager.setKing(blackKing);
 		whiteManager.setKing(whiteKing);
+		pieceManager.updatePieceMoves();
+		turn = Colour.BLACK;
+	}
+	
+	public void startTurn() {
+		turn = turn.opposite();
+		gui.setPieceClicks(turn);
+	}
+	
+	public void endTurn() {
+		blackManager.setCheck();
+		whiteManager.setCheck();
+		pieceManager.updatePieceMoves();
+		KingManager km = getKM(turn.opposite());
+		switch(km.getCheckState()) {
+		case CHECKMATE:
+			return;
+		case CHECK:
+			return;
+		default:
+			break;
+		}
 	}
 	
 	public void setWinner(Colour colour) {
@@ -62,14 +108,5 @@ public class GameManager {
 	
 	public Colour getWinner() {
 		return winner;
-	}
-	
-	public static void main(String[] args) {
-		GameManager gm = GameManager.instance;
-		Board board = gm.getBoard();
-		Knight p = new Knight(2, 2, Colour.WHITE);
-		board.getCell(2, 2).setPiece(p);
-		System.out.println(p.getMoves());
-		System.out.println(p.getKills());
 	}
 }

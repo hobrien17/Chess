@@ -33,4 +33,9 @@ public class Pawn extends AbstractPiece {
 		return colour.toString() + " Pawn (" + row + ", " + col + ")";
 	}
 
+	@Override
+	public String getName() {
+		return "pawn";
+	}
+
 }

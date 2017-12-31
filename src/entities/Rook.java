@@ -21,4 +21,9 @@ public class Rook extends AbstractPiece {
 	public String toString() {
 		return colour.toString() + " Rook (" + row + ", " + col + ")";
 	}
+
+	@Override
+	public String getName() {
+		return "rook";
+	}
 }

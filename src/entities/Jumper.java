@@ -39,7 +39,7 @@ public abstract class Jumper extends AbstractPiece {
 	public List<Move> calculateKills() {
 		List<Move> result = new ArrayList<>();
 		for(Cell cell : getJumps()) {
-			if(cell.isOccupied()) {
+			if(cell.isOccupied() && cell.getPiece().getColour().equals(colour.opposite())) {
 				Move move = new Move(getCell(), cell);
 				result.add(move);
 			}

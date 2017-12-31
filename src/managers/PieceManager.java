@@ -5,6 +5,7 @@ import java.util.List;
 
 import entities.AbstractPiece;
 import entities.Colour;
+import world.Board;
 import world.Move;
 
 public class PieceManager {
@@ -14,10 +15,7 @@ public class PieceManager {
 	public void setBlackPieces(List<AbstractPiece> pieces) {
 		black = new ArrayList<>(pieces);
 	}
-	/**
-	 * 
-	 * @param pieces
-	 */
+	
 	public void setWhitePieces(List<AbstractPiece> pieces) {
 		white = new ArrayList<>(pieces);
 	}
@@ -66,5 +64,10 @@ public class PieceManager {
 			result.addAll(piece.getPossible());
 		}
 		return result;
+	}
+	
+	public void removePiece(AbstractPiece piece) {
+		white.remove(piece);
+		black.remove(piece);
 	}
 }

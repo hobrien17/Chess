@@ -1,16 +1,24 @@
 package world;
 
 import entities.AbstractPiece;
+import entities.Colour;
 
 public class Cell {
 	private AbstractPiece piece;
 	private int row;
 	private int col;
+	private Colour colour;
 	
-	public Cell(int row, int col) {
+	public Cell(int row, int col, Colour colour) {
 		piece = null;
+		this.colour = colour;
 		this.row = row;
 		this.col = col;
+	}
+	
+	public Cell(int row, int col, Colour colour, AbstractPiece piece) {
+		this(row, col, colour);
+		this.piece = piece;
 	}
 	
 	public int getRow() {
@@ -19,10 +27,6 @@ public class Cell {
 	
 	public int getCol() {
 		return col;
-	}
-	
-	public Cell(int row, int col, AbstractPiece piece) {
-		this.piece = piece;
 	}
 	
 	public boolean isOccupied() {
@@ -45,6 +49,10 @@ public class Cell {
 	
 	public void removePiece() {
 		piece = null;
+	}
+	
+	public Colour getColour() {
+		return colour;
 	}
 	
 	public String toString() {

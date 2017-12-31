@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import managers.GameManager;
 import world.Cell;
 
 /**
@@ -19,8 +20,11 @@ public class Knight extends Jumper {
 		List<Cell> jumps = new ArrayList<>();
 		for(int i = -2; i <= 2; i++) {
 			for(int j = -2; j <= 2; j++) {
-				if(i != 0 && j != 0 && i != j && i != j*-1) {
-					jumps.add(new Cell(row + i, col + j));
+				if(i != 0 && j != 0 && i != j && i != j*-1 && 
+						row + i >= 0 && col + j >= 0 && 
+						row + i < GameManager.instance.getBoard().getHeight() && 
+						col + j < GameManager.instance.getBoard().getWidth() ) {
+					jumps.add(GameManager.instance.getBoard().getCell(row + i, col + j));
 				}
 			}
 		}
@@ -30,6 +34,12 @@ public class Knight extends Jumper {
 	@Override
 	public String toString() {
 		return colour.toString() + " Knight (" + row + ", " + col + ")";
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "knight";
 	}
 
 }

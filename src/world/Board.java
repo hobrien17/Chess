@@ -1,5 +1,7 @@
 package world;
 
+import entities.Colour;
+
 public class Board {
 	private int rows;
 	private int cols;
@@ -9,9 +11,19 @@ public class Board {
 		this.rows = rows;
 		this.cols = cols;
 		grid = new Cell[rows][cols];
+		
+		boolean prev = false;
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
-				grid[i][j] = new Cell(i, j);
+				if(prev) {
+					grid[i][j] = new Cell(i, j, Colour.BLACK);
+				} else {
+					grid[i][j] = new Cell(i, j, Colour.WHITE);
+				}
+				prev = !prev;
+			}
+			if(cols % 2 == 0) {
+				prev = !prev;
 			}
 		}
 	}

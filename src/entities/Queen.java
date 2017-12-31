@@ -20,4 +20,9 @@ public class Queen extends AbstractPiece {
 	public String toString() {
 		return colour.toString() + " Queen (" + row + ", " + col + ")";
 	}
+
+	@Override
+	public String getName() {
+		return "queen";
+	}
 }
